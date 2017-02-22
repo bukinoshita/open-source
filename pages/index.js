@@ -5,7 +5,7 @@ import Head from 'next/head'
 
 export default class OpenSource extends Component {
   static async getInitialProps () {
-    const res = await fetch('https://api.github.com/search/issues?q=language:javascript+state:open+label:first-timers-only&sort=created&order=asc')
+    const res = await fetch('https://api.github.com/search/issues?q=language:javascript+state:open+label:first-timers-only&sort=created&order=desc')
     const json = await res.json()
     return { issues: json.items }
   }

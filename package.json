@@ -1,8 +1,7 @@
 {
   "name": "open-source",
   "version": "0.0.0",
-  "description": "Embrace Open Source with First Timers Only issues",
-  "main": "index.js",
+  "description": "A list of GitHub issues to help beginners make it's first pull request",
   "repository": {
     "url": "git@github.com:bukinoshita/open-source.git",
     "type": "git"

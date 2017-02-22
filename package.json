@@ -1,0 +1,22 @@
+{
+  "name": "open-source",
+  "version": "0.0.0",
+  "description": "Embrace Open Source with First Timers Only issues",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:bukinoshita/open-source.git",
+    "type": "git"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "next": "2.0.0-beta.20",
+    "react-truncate": "^2.0.5"
+  },
+  "author": "Bu Kinoshita <bukinoshita@gmail.com>",
+  "license": "MIT"
+}

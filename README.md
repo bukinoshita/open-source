@@ -1,5 +1,5 @@
 # Open Source
-> A list of GitHub issues to help beginners make it's first pull request.
+> A list of GitHub issues to help beginners make their first pull request.
 
 ## Install
 ```bash

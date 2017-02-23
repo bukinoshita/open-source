@@ -23,13 +23,13 @@ export default class OpenSource extends Component {
           <title>Open Source — It's never too late to join the party 🎉🎉</title>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <meta charSet="utf-8"/>
-          <meta name="description" content="Open Source is a list of GitHub issues to help beginners make it's first pull request."/>
+          <meta name="description" content="Open Source is a list of GitHub issues to help beginners make their first pull request."/>
           <meta name="keywords" content="github, open source, code, git, contributions"/>
         </Head>
 
         <div className="row">
           <h1 className="page__title">Embrace Open Source</h1>
-          <h2 className="page__subtitle">A list of GitHub issues to help beginners make it's first pull request.</h2>
+          <h2 className="page__subtitle">A list of GitHub issues to help beginners make their first pull request.</h2>
 
           <ul className="list">
             {issueList}

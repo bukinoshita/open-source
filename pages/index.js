@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import 'isomorphic-fetch'
 import Truncate from 'react-truncate'
 import Head from 'next/head'
+import ListItem from '../components/ListItem';
+
 
 export default class OpenSource extends Component {
   static async getInitialProps () {
@@ -13,16 +15,7 @@ export default class OpenSource extends Component {
   render () {
     const { issues } = this.props
     const issueList = issues.map(issue => (
-      <li className="list-item" key={issue.id}>
-        <a className="list-item-link" href={issue.html_url}>
-          <h3 className="list-item__title">
-            <Truncate lines={2}>{issue.title}</Truncate>
-          </h3>
-          <p className="list-item__description">
-            <Truncate lines={3}>{issue.body || 'No description on this issue'}</Truncate>
-          </p>
-        </a>
-      </li>
+      <ListItem key={issue.id} {...issue} />
     ))
 
     return (

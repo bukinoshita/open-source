@@ -1,7 +1,7 @@
 {
   "name": "open-source",
   "version": "0.0.0",
-  "description": "A list of GitHub issues to help beginners make it's first pull request",
+  "description": "A list of GitHub issues to help beginners make their first pull request",
   "repository": {
     "url": "git@github.com:bukinoshita/open-source.git",
     "type": "git"

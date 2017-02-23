@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import 'isomorphic-fetch'
-import Truncate from 'react-truncate'
 import Head from 'next/head'
 import ListItem from '../components/ListItem';
 

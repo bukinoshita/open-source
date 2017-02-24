@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "xo"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
@@ -17,5 +18,12 @@
     "react-truncate": "^2.0.5"
   },
   "author": "Bu Kinoshita <bukinoshita@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "xo": "^0.17.1"
+  },
+  "xo": {
+    "semicolon": false,
+    "space": true
+  }
 }

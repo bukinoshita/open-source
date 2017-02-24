@@ -20,9 +20,12 @@
   "author": "Bu Kinoshita <bukinoshita@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "eslint-config-xo-react": "^0.10.0",
+    "eslint-plugin-react": "^6.10.0",
     "xo": "^0.17.1"
   },
   "xo": {
+    "extends": "xo-react",
     "semicolon": false,
     "space": true
   }

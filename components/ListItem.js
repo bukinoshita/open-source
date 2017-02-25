@@ -4,16 +4,17 @@ const { string, number, shape, arrayOf, func } = React.PropTypes
 
 const ListItem = (props) => (
   <li className="list-item">
-    <div className="row">
-      {
-        props.languages.map((language) => (
-          <button onClick={() => props.onCategoryFilter(language)} key={`${language}-list-item`}>
-            {language}
-          </button>
-        ))
-      }
-    </div>
     <a className="list-item-link" href={props.html_url}>
+      <div className="list-item-category-container">
+        {
+          props.languages.map((language) => (
+            <span key={`${language}-list-item`} className='list-item-category'>
+              {language}
+            </span>
+          ))
+        }
+      </div>
+
       <h3 className="list-item__title">
         <Truncate lines={2}>{props.title}</Truncate>
       </h3>

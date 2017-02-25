@@ -15,8 +15,7 @@
     "isomorphic-fetch": "^2.2.1",
     "next": "2.0.0-beta.20",
     "react-truncate": "^2.0.5",
-    "lodash": "4.17.4",
-    "dotenv": "4.0.0"
+    "lodash": "4.17.4"
   },
   "author": "Bu Kinoshita <bukinoshita@gmail.com>",
   "license": "MIT"

@@ -1,21 +1,73 @@
-import React, { Component } from 'react'
+import '../env'
 import 'isomorphic-fetch'
+import React, { Component } from 'react'
 import Head from 'next/head'
-import ListItem from '../components/ListItem';
+import ListItem from '../components/ListItem'
+import FilterButton from '../components/FilterButton'
+import Footer from '../components/Footer'
+import getRepoLanguagesStoreFromIssues from '../services/getRepoLanguagesStoreFromIssues'
+import { flatten, uniq, includes, set } from 'lodash'
+const { arrayOf, object, shape, number } = React.PropTypes
 
+const clearLanguageFilterButtonText = 'All languages'
 
 export default class OpenSource extends Component {
   static async getInitialProps () {
-    const res = await fetch('https://api.github.com/search/issues?q=language:javascript+state:open+label:first-timers-only&sort=created&order=desc')
-    const json = await res.json()
-    return { issues: json.items }
+    const getIssuesRes = await fetch(
+      `https://api.github.com/search/issues?q=state:open+label:first-timers-only&sort=created&order=desc&per_page=100&access_token=${process.env.GITHUB_TOKEN}`,
+      {cache: 'default'}
+    )
+    const issuesResJson = await getIssuesRes.json()
+    const issues = issuesResJson.items
+    const repoLanguagesStore = await getRepoLanguagesStoreFromIssues(issues)
+    const languages = uniq(flatten(Object.values(repoLanguagesStore)))
+    const languageCountStore = languages.reduce(
+      (languageCountStore, language) => set(languageCountStore, language, 0),
+      { [clearLanguageFilterButtonText]: issues.length }
+    )
+
+    issues.forEach(issue => {
+      issue.languages = repoLanguagesStore[issue.repository_url]
+      issue.languages.forEach(language => languageCountStore[language] += 1)
+    })
+
+    return { issues, languageCountStore }
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = { languageFilter: clearLanguageFilterButtonText }
   }
 
   render () {
-    const { issues } = this.props
-    const issueList = issues.map(issue => (
-      <ListItem key={issue.id} {...issue} />
+    const { issues, languageCountStore } = this.props
+    const { languageFilter }  = this.state
+    let issueList
+
+    if (languageFilter === clearLanguageFilterButtonText) {
+      issueList = issues
+    } else {
+      issueList = issues.filter(issue => issue.languages.includes(languageFilter))
+    }
+
+    issueList = issueList.map(issue => (
+      <ListItem key={issue.id} {...issue} onCategoryFilter={(languageFilter) => this.setState({ languageFilter })} />
     ))
+
+    const languageFilterButtons = Object.keys(languageCountStore)
+      .sort((languageA, languageB) => (
+        languageCountStore[languageB] - languageCountStore[languageA]
+      ))
+      .map((language) => (
+        <FilterButton
+          value={language}
+          secondaryText={languageCountStore[language]}
+          key={`${language}-filter-button`}
+          onFilter={(languageFilter) => this.setState({ languageFilter })}
+          currentFilter={this.state.languageFilter}
+        />
+      ))
 
     return (
       <div>
@@ -31,6 +83,10 @@ export default class OpenSource extends Component {
           <h1 className="page__title">Embrace Open Source</h1>
           <h2 className="page__subtitle">A list of GitHub issues to help beginners make their first pull request.</h2>
 
+          <div className="button__container">
+            {languageFilterButtons}
+          </div>
+
           <ul className="list">
             {issueList}
 
@@ -39,9 +95,7 @@ export default class OpenSource extends Component {
           </ul>
         </div>
 
-        <footer className="footer">
-          <p className="footer__text">Made by <a href="https://twitter.com/bukinoshita" className="footer__text--link">Bu Kinoshita</a>. Check this project on <a href="https://github.com/bukinoshita/open-source" className="footer__text--link">Github</a> 🎉</p>
-        </footer>
+        <Footer />
 
         <style jsx global>{`
           * {
@@ -68,8 +122,54 @@ export default class OpenSource extends Component {
             padding: 15px;
           }
 
+          .button__container {
+            background-color: #ffffff;
+            margin-bottom: 50px;
+            padding-left: 15px;
+            padding-top: 15px;
+            padding-right: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
+
+          .filter__button {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #ffffff;
+            opacity: 0.85;
+            color: #A9A9A9;
+            border: 2px solid #A9A9A9;
+            cursor: pointer;
+            font-size: 12px;
+            outline: none;
+          }
+
+          .filter__button:hover, .filter__button.selected {
+            transition: 0.3s;
+            color: #885ead;
+            border: 2px solid #885ead;
+            opacity: 1;
+          }
+
+          .secondary__text {
+            margin-left: 10px;
+            width: 30px;
+            background: #A9A9A9;
+            display: inline-block;
+            padding: 3px;
+            font-size: 10px;
+            color: #ececec;
+            border-radius: 10px;
+          }
+
+          .filter__button:hover .secondary__text, .filter__button.selected .secondary__text {
+            background: #885ead;
+            color: #ffffff;
+          }
+
           .page__title {
-            color: #fff;
+            color: #ffffff;
             font-weight: 100;
             text-align: center;
             font-size: 30px;
@@ -97,8 +197,8 @@ export default class OpenSource extends Component {
             margin-bottom: 25px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
             transition: .15s;
-            min-height: 200px;
-            max-height: 200px;
+            min-height: 220px;
+            max-height: 220px;
             overflow: hidden;
           }
 
@@ -116,6 +216,21 @@ export default class OpenSource extends Component {
             display: block;
             padding: 30px;
             text-decoration: none;
+          }
+
+          .list-item-category-container {
+            display: flex;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+          }
+
+          .list-item-category {
+            color: white;
+            background: #551A8B;
+            font-size: 10px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+            padding: 8px;
           }
 
           .list-item__title {
@@ -141,7 +256,7 @@ export default class OpenSource extends Component {
           }
 
           .footer__text {
-            color: #fff;
+            color: #ffffff;
             text-align: center;
             font-size: 14px;
           }
@@ -172,4 +287,9 @@ export default class OpenSource extends Component {
       </div>
     )
   }
+}
+
+OpenSource.propTypes = {
+  issues: arrayOf(object),
+  languageCountStore: shape({ language: number })
 }

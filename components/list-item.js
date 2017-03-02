@@ -73,7 +73,6 @@ const ListItem = props => {
 
 ListItem.propTypes = {
   title: string,
-  body: string,
   html_url: string,
   languages: arrayOf(string)
 }

@@ -5,7 +5,7 @@ import {
   uniq,
   set
 } from 'lodash'
-import env from '../env'
+import env from '../env' // eslint-disable-line import/no-unresolved
 import Meta from './../components/meta'
 import PageTitle from './../components/page-title'
 import List from './../components/list'

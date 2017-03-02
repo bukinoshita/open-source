@@ -1,6 +1,6 @@
 {
   "name": "open-source",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A list of GitHub issues to help beginners make their first pull request",
   "repository": {
     "url": "git@github.com:bukinoshita/open-source.git",
@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
+    "lodash": "4.17.4",
     "next": "2.0.0-beta.20",
-    "react-truncate": "^2.0.5",
-    "lodash": "4.17.4"
+    "react": "^15.4.2"
   },
   "author": "Bu Kinoshita <bukinoshita@gmail.com>",
   "license": "MIT",
@@ -28,6 +28,13 @@
   "xo": {
     "extends": "xo-react",
     "semicolon": false,
-    "space": true
+    "space": true,
+    "rules": {
+      "react/no-unescaped-entities": 0,
+      "react/jsx-no-bind": 0,
+      "camelcase": 0,
+      "no-return-assign": 0,
+      "no-unused-vars": 0
+    }
   }
 }

@@ -97,7 +97,7 @@ export default class OpenSource extends Component {
           <div className={`button__container ${isCollapsed}`}>
             <div className="button__wrapper">
               <div className="button__container--arrow">
-                <svg onClick={this.handleCollapseFilter} className="button__container--icon" x="0px" y="0px" viewBox="0 0 100 125" enableBackground="new 0 0 100 100">
+                <svg onClick={this.handleCollapseFilter} className="button__container--icon" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100">
                   <polygon points="53.681,60.497 53.681,60.497 75.175,39.001 71.014,34.843 49.519,56.337 29.006,35.823 24.846,39.982   49.519,64.656 "/>
                 </svg>
               </div>
@@ -159,6 +159,11 @@ export default class OpenSource extends Component {
             height: 30px;
             width: 100%;
             vertical-align: middle;
+          }
+
+          .button__container.is-open .button__container--icon {
+            transform: rotate(180deg);
+            transition: all 300ms ease-in 0s;
           }
 
           .filter-button--fake {

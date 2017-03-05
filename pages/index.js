@@ -95,16 +95,18 @@ export default class OpenSource extends Component {
 
         <div className="row">
           <div className={`button__container ${isCollapsed}`}>
-            <div className="button__container--arrow">
-              <svg onClick={this.handleCollapseFilter} className="button__container--icon" x="0px" y="0px" viewBox="0 0 100 125" enableBackground="new 0 0 100 100">
-                <polygon points="53.681,60.497 53.681,60.497 75.175,39.001 71.014,34.843 49.519,56.337 29.006,35.823 24.846,39.982   49.519,64.656 "/>
-              </svg>
+            <div className="button__wrapper">
+              <div className="button__container--arrow">
+                <svg onClick={this.handleCollapseFilter} className="button__container--icon" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100">
+                  <polygon points="53.681,60.497 53.681,60.497 75.175,39.001 71.014,34.843 49.519,56.337 29.006,35.823 24.846,39.982   49.519,64.656 "/>
+                </svg>
+              </div>
+              {languageFilterButtons}
+              <div className="filter-button--fake"/>
+              <div className="filter-button--fake"/>
+              <div className="filter-button--fake"/>
+              <div className="filter-button--fake"/>
             </div>
-            {languageFilterButtons}
-            <div className="filter-button--fake"/>
-            <div className="filter-button--fake"/>
-            <div className="filter-button--fake"/>
-            <div className="filter-button--fake"/>
           </div>
 
           <List list={issueList}/>
@@ -123,21 +125,22 @@ export default class OpenSource extends Component {
           .button__container {
             background-color: #ffffff;
             margin-bottom: 50px;
-            padding-left: 15px;
-            padding-top: 15px;
-            padding-right: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
             max-height: 100px;
             overflow: hidden;
             position: relative;
-            transition: .15s;
+            transition: max-height 300ms cubic-bezier(0, .6, .6, 1);
           }
 
           .button__container.is-open {
-            max-height: 100%;
-            padding-bottom: 30px;
+            max-height: 999px;
+            transition: max-height 400ms ease-in;
+          }
+
+          .button__wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 15px 15px 30px 15px;
           }
 
           .button__container--arrow {
@@ -146,6 +149,7 @@ export default class OpenSource extends Component {
             z-index: 10;
             position: absolute;
             bottom: 0;
+            right: 0;
             text-align: center;
             padding-top: 10px;
           }
@@ -153,8 +157,13 @@ export default class OpenSource extends Component {
           .button__container--icon {
             cursor: pointer;
             height: 30px;
-            width: 30px;
+            width: 100%;
             vertical-align: middle;
+          }
+
+          .button__container.is-open .button__container--icon {
+            transform: rotate(180deg);
+            transition: all 300ms ease-in 0s;
           }
 
           .filter-button--fake {

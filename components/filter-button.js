@@ -29,11 +29,11 @@ const FilterButton = props => {
           flex-basis: calc(20% - 10px);
           text-align: left;
           position: relative;
+          transition: 0.15s;
         }
 
         .filter__btn--selected,
         .filter__btn:hover {
-          transition: 0.15s;
           color: #551A8B;
           border: 2px solid #551A8B;
           opacity: 1;

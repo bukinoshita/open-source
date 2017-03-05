@@ -149,6 +149,7 @@ export default class OpenSource extends Component {
             z-index: 10;
             position: absolute;
             bottom: 0;
+            right: 0;
             text-align: center;
             padding-top: 10px;
           }

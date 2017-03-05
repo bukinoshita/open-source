@@ -157,7 +157,7 @@ export default class OpenSource extends Component {
           .button__container--icon {
             cursor: pointer;
             height: 30px;
-            width: 30px;
+            width: 100%;
             vertical-align: middle;
           }
 

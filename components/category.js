@@ -11,10 +11,12 @@ const Category = props => (
     <style jsx>{`
       .list-categories__category {
         color: white;
-        background-color: #551A8B;
-        font-size: 10px;
+        text-transform: uppercase;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, .2);
+        font-size: 12px;
         margin-right: 10px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         padding: 8px;
         display: inline-block;
       }

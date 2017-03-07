@@ -23,6 +23,8 @@ export default () => (
       <meta property="og:image" content="static/oss.png"/>
       <meta property="og:description" content="Open Source is a list of GitHub issues to help beginners make their first pull request."/>
       <meta property="og:site_name" content="Open Source"/>
+
+      <script src="static/analytics.js"/>
     </Head>
 
     <style jsx global>{`
@@ -33,9 +35,7 @@ export default () => (
       }
 
       body {
-        background: #5f357d;
-        background: -webkit-radial-gradient(circle farthest-corner at right bottom,#ffd08a 0,#ffa376 28%,#d26578 52%,#682a84 79%,#241668 100%);
-        background: radial-gradient(circle farthest-corner at right bottom,#ffd08a 0,#ffa376 28%,#d26578 52%,#682a84 79%,#241668 100%);
+        background-color: #fff;
         font-family: 'SF UI Display', 'Helvetica Neue', 'Helvetica';
       }
 

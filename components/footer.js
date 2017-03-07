@@ -22,7 +22,7 @@ const Footer = () => {
           margin-top: 100px;
           padding-top: 50px;
           padding-bottom: 50px;
-          background-color: rgba(0, 0, 0, .1);
+          background: linear-gradient(45deg,#439be5,#8943e5);
         }
 
         .footer__text {
@@ -34,14 +34,20 @@ const Footer = () => {
         }
 
         .footer__text--link {
-          color: #241668;
+          color: #fff;
           text-decoration: none;
           cursor: pointer;
           font-weight: 900;
+          border-bottom: 2px solid #fff;
+          padding-bottom: 5px;
+          transition: .15s;
+          opacity: .75;
+          display: inline-block;
         }
 
         .footer__text--link:hover {
-          opacity: .75;
+          transform: translateY(-4px);
+          opacity: 1;
         }
       `}</style>
     </footer>

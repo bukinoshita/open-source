@@ -15,10 +15,10 @@ const ListItem = props => {
 
   return (
     <li className="list-item">
-      <a className="list-item-link" href={props.html_url}>
-        <ul className="list-categories">{categories}</ul>
-
+      <a className="list-item-link" href={props.html_url} target="_blank" rel="noopener noreferrer">
         <h3 className="list-item__title">{props.title}</h3>
+
+        <ul className="list-categories">{categories}</ul>
       </a>
 
       <style jsx>{`
@@ -26,32 +26,36 @@ const ListItem = props => {
           background-color: #fff;
           flex-basis: 32%;
           margin-bottom: 25px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
           transition: .15s;
           min-height: 200px;
           overflow: hidden;
+          border-radius: 4px;
+          background: linear-gradient(45deg,#439be5,#8943e5);
         }
 
         .list-item:hover {
           transform: translateY(-4px);
+          box-shadow: 0 16px 24px 0 rgba(60, 71, 81, .1)
         }
 
         .list-item-link {
           display: block;
           padding: 30px;
           text-decoration: none;
+          height: 100%;
         }
 
         .list-categories {
           display: flex;
-          margin-bottom: 20px;
+          margin-top: 20px;
           flex-wrap: wrap;
         }
 
         .list-item__title {
-          color: #292E31;
-          font-size: 16px;
-          line-height: 22px;
+          color: #fff;
+          font-size: 18px;
+          line-height: 24px;
           font-weight: 400;
         }
 

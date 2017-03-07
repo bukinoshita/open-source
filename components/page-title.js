@@ -7,20 +7,21 @@ const PageTitle = () => (
 
     <style jsx>{`
       .page__title {
-        color: #ffffff;
-        font-weight: 100;
+        color: #3d4752;
+        font-weight: 400;
         text-align: center;
-        font-size: 30px;
+        font-size: 32px;
         margin-top: 100px;
+        letter-spacing: 2px;
       }
 
       .page__subtitle {
         margin-bottom: 100px;
-        color: rgba(255, 255, 255, .75);
-        font-weight: 100;
+        color: #5a646f;
+        font-weight: 300;
         text-align: center;
         font-size: 18px;
-        margin-top: 5px;
+        margin-top: 15px;
       }
     `}</style>
   </div>

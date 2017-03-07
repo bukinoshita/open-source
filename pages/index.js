@@ -64,6 +64,7 @@ export default class OpenSource extends Component {
     const {issues, languageCountStore} = this.props
     const {languageFilter, collapsed} = this.state
     const isCollapsed = collapsed ? 'is-open' : ''
+    const expanded = collapsed ? 'Close filter' : 'Expand filter'
     let issueList
 
     if (languageFilter === clearLanguageFilterButtonText) {
@@ -96,11 +97,13 @@ export default class OpenSource extends Component {
         <div className="row">
           <div className={`button__container ${isCollapsed}`}>
             <div className="button__wrapper">
-              <div className="button__container--arrow">
-                <svg onClick={this.handleCollapseFilter} className="button__container--icon" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100">
+              <div className="button__container--arrow" onClick={this.handleCollapseFilter}>
+                {expanded}
+                <svg fill="#949ea7" className="button__container--icon" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100">
                   <polygon points="53.681,60.497 53.681,60.497 75.175,39.001 71.014,34.843 49.519,56.337 29.006,35.823 24.846,39.982   49.519,64.656 "/>
                 </svg>
               </div>
+
               {languageFilterButtons}
               <div className="filter-button--fake"/>
               <div className="filter-button--fake"/>
@@ -140,24 +143,26 @@ export default class OpenSource extends Component {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            padding: 15px 15px 30px 15px;
+            padding: 15px 0 30px;
           }
 
           .button__container--arrow {
             width: 100%;
             background-color: #fff;
+            color: #949ea7;
             z-index: 10;
             position: absolute;
             bottom: 0;
             right: 0;
             text-align: center;
             padding-top: 10px;
+            cursor: pointer;
+            opacity: .95;
           }
 
           .button__container--icon {
             cursor: pointer;
-            height: 30px;
-            width: 100%;
+            height: 24px;
             vertical-align: middle;
           }
 

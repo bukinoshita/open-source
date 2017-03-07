@@ -21,8 +21,8 @@ const FilterButton = props => {
           padding: 10px;
           background-color: #ffffff;
           opacity: 0.85;
-          color: #A9A9A9;
-          border: 2px solid #A9A9A9;
+          color: #949ea7;
+          border: 2px solid #949ea7;
           cursor: pointer;
           font-size: 12px;
           outline: none;
@@ -30,25 +30,26 @@ const FilterButton = props => {
           text-align: left;
           position: relative;
           transition: 0.15s;
+          border-radius: 4px;
         }
 
         .filter__btn--selected,
         .filter__btn:hover {
-          color: #551A8B;
-          border: 2px solid #551A8B;
+          color: #8943e5;
+          border: 2px solid #8943e5;
           opacity: 1;
         }
 
         .filter__btn--selected .filter__btn--badge,
         .filter__btn:hover .filter__btn--badge {
-          background: #551A8B;
+          background: #8943e5;
           color: #ffffff;
         }
 
         .filter__btn--badge {
           margin-left: 10px;
           width: 25px;
-          background: #A9A9A9;
+          background: #949ea7;
           display: inline-block;
           padding: 3px;
           font-size: 10px;

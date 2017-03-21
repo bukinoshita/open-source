@@ -63,6 +63,7 @@ const FilterButton = props => {
         @media (max-width: 500px) {
           .filter__btn {
             min-width: calc(50% - 5px);
+            flex-basis: calc(50% - 5px);
           }
         }
       `}</style>

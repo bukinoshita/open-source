@@ -1,11 +1,6 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import fetch from 'isomorphic-fetch'
-import {
-  flatten,
-  uniq,
-  set
-} from 'lodash'
-import env from '../env' // eslint-disable-line import/no-unresolved
+import { flatten, uniq, set } from 'lodash'
 import Meta from './../components/meta'
 import PageTitle from './../components/page-title'
 import List from './../components/list'
@@ -14,18 +9,15 @@ import Footer from './../components/footer'
 import getLanguages from './../services/get-languages'
 
 const clearLanguageFilterButtonText = 'All languages'
-const {
-  arrayOf,
-  object,
-  shape,
-  number
-} = React.PropTypes
+const { arrayOf, object, shape, number } = React.PropTypes
 
 export default class OpenSource extends Component {
   static async getInitialProps() {
     const getIssuesRes = await fetch(
-      `https://api.github.com/search/issues?q=state:open+label:first-timers-only&sort=created&order=desc&per_page=100&access_token=${process.env.GITHUB_TOKEN}`,
-      {cache: 'default'}
+      `https://api.github.com/search/issues?q=state:open+label:first-timers-only&sort=created&order=desc&per_page=100&access_token=${
+        process.env.GITHUB_TOKEN
+      }`,
+      { cache: 'default' }
     )
     const issuesResJson = await getIssuesRes.json()
     const issues = issuesResJson.items
@@ -33,15 +25,15 @@ export default class OpenSource extends Component {
     const languages = uniq(flatten(Object.values(repoLanguagesStore)))
     const languageCountStore = languages.reduce(
       (languageCountStore, language) => set(languageCountStore, language, 0),
-      {[clearLanguageFilterButtonText]: issues.length}
+      { [clearLanguageFilterButtonText]: issues.length }
     )
 
     issues.forEach(issue => {
       issue.languages = repoLanguagesStore[issue.repository_url]
-      issue.languages.forEach(language => languageCountStore[language] += 1)
+      issue.languages.forEach(language => (languageCountStore[language] += 1))
     })
 
-    return {issues, languageCountStore}
+    return { issues, languageCountStore }
   }
 
   constructor(props) {
@@ -61,8 +53,8 @@ export default class OpenSource extends Component {
   }
 
   render() {
-    const {issues, languageCountStore} = this.props
-    const {languageFilter, collapsed} = this.state
+    const { issues, languageCountStore } = this.props
+    const { languageFilter, collapsed } = this.state
     const isCollapsed = collapsed ? 'is-open' : ''
     const expanded = collapsed ? 'Close filter' : 'Expand filter'
     let issueList
@@ -70,52 +62,65 @@ export default class OpenSource extends Component {
     if (languageFilter === clearLanguageFilterButtonText) {
       issueList = issues
     } else {
-      issueList = issues.filter(issue => issue.languages.includes(languageFilter))
+      issueList = issues.filter(issue =>
+        issue.languages.includes(languageFilter)
+      )
     }
 
     const languageFilterButtons = Object.keys(languageCountStore)
-      .sort((languageA, languageB) => (
-        languageCountStore[languageB] - languageCountStore[languageA]
-      ))
+      .sort(
+        (languageA, languageB) =>
+          languageCountStore[languageB] - languageCountStore[languageA]
+      )
       .map(language => (
         <FilterButton
           value={language}
           secondaryText={languageCountStore[language]}
           key={`${language}-filter-button`}
-          onFilter={languageFilter => this.setState({languageFilter})}
+          onFilter={languageFilter => this.setState({ languageFilter })}
           currentFilter={this.state.languageFilter}
-          />
+        />
       ))
 
     return (
       <div>
-        <Meta/>
+        <Meta />
         <div className="row">
-          <PageTitle/>
+          <PageTitle />
         </div>
 
         <div className="row">
           <div className={`button__container ${isCollapsed}`}>
             <div className="button__wrapper">
-              <div className="button__container--arrow" onClick={this.handleCollapseFilter}>
+              <div
+                className="button__container--arrow"
+                onClick={this.handleCollapseFilter}
+              >
                 {expanded}
-                <svg fill="#949ea7" className="button__container--icon" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100">
-                  <polygon points="53.681,60.497 53.681,60.497 75.175,39.001 71.014,34.843 49.519,56.337 29.006,35.823 24.846,39.982   49.519,64.656 "/>
+                <svg
+                  fill="#949ea7"
+                  className="button__container--icon"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 100 100"
+                  enableBackground="new 0 0 100 100"
+                >
+                  <polygon points="53.681,60.497 53.681,60.497 75.175,39.001 71.014,34.843 49.519,56.337 29.006,35.823 24.846,39.982   49.519,64.656 " />
                 </svg>
               </div>
 
               {languageFilterButtons}
-              <div className="filter-button--fake"/>
-              <div className="filter-button--fake"/>
-              <div className="filter-button--fake"/>
-              <div className="filter-button--fake"/>
+              <div className="filter-button--fake" />
+              <div className="filter-button--fake" />
+              <div className="filter-button--fake" />
+              <div className="filter-button--fake" />
             </div>
           </div>
 
-          <List list={issueList}/>
+          <List list={issueList} />
         </div>
 
-        <Footer/>
+        <Footer />
 
         <style jsx global>{`
           .row {
@@ -131,7 +136,7 @@ export default class OpenSource extends Component {
             max-height: 100px;
             overflow: hidden;
             position: relative;
-            transition: max-height 300ms cubic-bezier(0, .6, .6, 1);
+            transition: max-height 300ms cubic-bezier(0, 0.6, 0.6, 1);
           }
 
           .button__container.is-open {
@@ -157,7 +162,7 @@ export default class OpenSource extends Component {
             text-align: center;
             padding-top: 10px;
             cursor: pointer;
-            opacity: .95;
+            opacity: 0.95;
           }
 
           .button__container--icon {
@@ -182,5 +187,5 @@ export default class OpenSource extends Component {
 
 OpenSource.propTypes = {
   issues: arrayOf(object),
-  languageCountStore: shape({language: number})
+  languageCountStore: shape({ language: number })
 }
